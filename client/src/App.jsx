@@ -14,12 +14,16 @@ const theme = {
 }
 
 const StyledMain = styled.main`
-  background-color: ${({ theme }) => theme.black};;
+  background-color: ${({ theme }) => theme.black};
   min-height: 100vh;
   width: 100vw;
   font-family: helvetica;
   * {
     box-sizing: border-box;
+  }
+  *::selection {
+    color: ${({ theme }) => theme.white}; 
+    background: ${({ theme }) => theme.primary};
   }
 `;
 

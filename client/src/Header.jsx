@@ -27,7 +27,10 @@ const StyledGithubLogo = styled(GitHubLogo)`
 export default () => ( 
   <StyledHeader>
     <StyledH1>Artist connections</StyledH1>
-    <a href="https://github.com/lennertVanSever/artist-connections">
+    <a 
+      aria-label="Have a look at the GitHub repository to know exactly how this project was build"
+      href="https://github.com/lennertVanSever/artist-connections"
+    >
       <StyledGithubLogo />
     </a>
   </StyledHeader>
