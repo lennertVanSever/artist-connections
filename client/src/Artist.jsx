@@ -27,13 +27,14 @@ const titleStyle = css`
 const StyledH2 = styled.h2`
   ${titleStyle}
   font-size: 30px;
-  line-height: 35px;
+  line-height: 32px;
   font-weight: bold;
 `;
 
 const StyledH4 = styled.h4`
   ${titleStyle}
   font-size: 20px;
+  margin-top: 5px;
 `;
 
 const StyledBackground = styled.div`
@@ -66,23 +67,27 @@ const StyledBackIcon = styled(BackIcon)`
   height: 16px;
 `;
 
-const Artist = ({ data: { image, name, url, genre }, setSelectedArtist }) => (
+export default ({ data: { image, name, url, genre }, data, setSelectedArtist, backArrow }) => (
   <StyledWrapper image={image}>
     <StyledContent>
-      <form
-        onSubmit={event => {
-          event.preventDefault();
-          console.log('submitted');
-          setSelectedArtist(null);
-        }}
-      >
-        <StyledButton><StyledBackIcon /></StyledButton>
-      </form>
+      {
+        backArrow && (
+        <form
+          onSubmit={event => {
+            event.preventDefault();
+            setSelectedArtist({
+              ...data,
+              confirmed: false,
+            });
+          }}
+        >
+          <StyledButton><StyledBackIcon /></StyledButton>
+        </form>
+        )
+      }
       <StyledH2><StyledAnchor href={url}>{name}</StyledAnchor></StyledH2>
       <StyledH4>{genre}</StyledH4>
     </StyledContent>
     <StyledBackground />
   </StyledWrapper>
 );
-
-export default Artist;

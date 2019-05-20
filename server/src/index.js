@@ -9,6 +9,8 @@ app.listen(port);
 const search = require('./search');
 app.get('/search/:name', search.default);
 
-console.log(`api started on http://localhost:${port}`);
+const getPath = require('./getPath');
+app.get('/getPath/:firstArtistId/:secondArtistId', getPath.default);
+
 
 // require('./getPath.js');

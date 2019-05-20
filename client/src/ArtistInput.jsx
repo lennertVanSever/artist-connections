@@ -2,17 +2,12 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { ReactComponent as SearchIcon } from './icons/Search.svg';
 import Artist from './Artist';
+import { StyledArtistWrapper } from './styles';
 
 // https://codepen.io/anon/pen/RmNxwb
-const StyledSuperWrapper = styled.div`
-  max-width: 100%;
-  width: 300px;
-  height: 300px;
-  max-height: calc(50vh - 40px);
+const StyledSuperWrapper = styled(StyledArtistWrapper)`
+  background-color: ${({ theme }) => theme.black};
   perspective: 800px;
-  @media (orientation: landscape) {
-    max-height: calc(100vh - 55px);
-  }
 `;
 
 const StyledWrapper = styled.div`
@@ -21,7 +16,7 @@ const StyledWrapper = styled.div`
   height: 100%;
   transform-style: preserve-3d;
   transform-origin: center top;
-  transition: transform 1.5s;
+  transition: transform 1s ease;
   transform: rotateY(${({ rotate }) => rotate}deg);
 `;
 
@@ -105,7 +100,6 @@ const StyledButton = styled.button`
   margin-left: 8px;
   font-size: 20px;
   border-bottom: 1px solid ${({ theme }) => theme.lightGray};
-  cursor: pointer;
   &:focus, &:hover {
     outline: none;
     border-bottom: 1px solid ${({ theme }) => theme.primary};
@@ -136,7 +130,7 @@ const ArtistSuggestion = ({ data, setSelectedArtist }) => (
   <li>
     <form onSubmit={event => {
       event.preventDefault();
-      setSelectedArtist(data);
+      setSelectedArtist({ ...data, confirmed: true });
     }}>
       <StyledButton>{data.name}</StyledButton>
     </form>
@@ -169,9 +163,8 @@ const Search = ({ searchArtists, resetArtists, setProcessText }) => {
   )
 }
 
-export default () => {
+export default ({ selectedArtist, setSelectedArtist }) => {
   const [artists, setArtists] = useState(null);
-  const [selectedArtist, setSelectedArtist] = useState(null);
   const [processText, setProcessText] = useState('');
   const resetArtists = () => {
     setProcessText('');
@@ -179,7 +172,7 @@ export default () => {
   };
   const searchArtists = async (name) => {
     setProcessText('Searching for artists via Spotify...');
-    const result = await fetch(`http://localhost:8080/search/${name}`);
+    const result = await fetch(`${process.env.REACT_APP_SERVER_ADDRESS}/search/${name}`);
     setProcessText('');
     if (result.status === 200) {
       let data = await result.json();
@@ -213,8 +206,8 @@ export default () => {
   }
   return (
     <StyledSuperWrapper>
-      <StyledWrapper rotate={selectedArtist ? 180 : 0}>
-        <StyledArticleInput pointerEvents={selectedArtist && 'none'}>
+      <StyledWrapper rotate={selectedArtist.confirmed ? 180 : 0}>
+        <StyledArticleInput pointerEvents={(selectedArtist.confirmed) ? 'none' : 'all'}>
           <StyledInputWrapper>
             <StyledLabel><StyledSearchIcon/></StyledLabel>
             <Search setProcessText={setProcessText} searchArtists={searchArtists} resetArtists={resetArtists} />
@@ -223,7 +216,7 @@ export default () => {
           {getContent()}
         </StyledArticleInput>
         <StyledArticleArtist>
-          {selectedArtist && <Artist setSelectedArtist={setSelectedArtist} data={selectedArtist} />}
+          {selectedArtist && <Artist backArrow setSelectedArtist={setSelectedArtist} data={selectedArtist} />}
         </StyledArticleArtist>
       </StyledWrapper>
     </StyledSuperWrapper>

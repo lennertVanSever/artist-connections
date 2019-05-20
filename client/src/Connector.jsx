@@ -6,7 +6,11 @@ const StyledHr = styled.hr`
   width: 2px;
   border: none;
   background-color: ${({ theme }) => theme.white};;
-  margin: 0;
+  margin: auto;
+  position: absolute;
+  bottom: 0;
+  top: 0;
+  margin: auto;
   @media (orientation: landscape) {
     height: 2px;
     width: 100%;
@@ -14,14 +18,16 @@ const StyledHr = styled.hr`
 `;
 
 const StyledWrapper = styled.div`
-  height: 25px;
+  position: absolute;
+  z-index: 0;
+  height: calc(100% - 27px);
   @media (orientation: landscape) {
-    width: 25px;
+    width: calc(100% - 27px);
   }
 `;
 
 export default () => (
   <StyledWrapper>
-    <StyledHr />
+
   </StyledWrapper>
 )

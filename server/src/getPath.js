@@ -2,7 +2,8 @@ const neo4j = require('neo4j-driver').v1;
 const driver = neo4j.driver('bolt://localhost:7687', neo4j.auth.basic('neo4j', process.env.NEO4J_PASSWORD));
 const session = driver.session();
 const fetch = require('node-fetch');
-const { getAuthorizationHeader } = require('./spotify');
+const { getAuthorizationHeader, cherryPickData } = require('./spotify');
+
 
 const getPath = (artist1, artist2) => {
   return new Promise((resolve, reject) => {
@@ -26,17 +27,18 @@ const getPath = (artist1, artist2) => {
   });
 }
 
-const getData = async () => {
-  const shortestPath = await getPath('5K4W6rqBFWDnAN6FQUkS6x', '5YIaZ0ICxZyNEsATQRsxRk');
-  console.log(shortestPath);
+exports.default = async (req, res) => {
+  const shortestPath = await getPath(req.params.firstArtistId, req.params.secondArtistId);
   const headers = await getAuthorizationHeader();
   const response = await fetch(`https://api.spotify.com/v1/artists?ids=${shortestPath.join()}`, { headers });
   if (response.status === 200) {
     let data = await response.json();
-    console.log(data);
+    const cherryPickedData = cherryPickData(data.artists.slice(1, data.artists.length));
+    return res.json(cherryPickedData);
+  } else {
+    return res.status(500).send('something went wrong');
   }
   driver.close();
   session.close();
 }
 
-getData();

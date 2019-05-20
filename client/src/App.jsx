@@ -2,8 +2,7 @@ import React from 'react';
 import styled, { ThemeProvider } from 'styled-components';
 import { Reset } from 'styled-reset'
 import Header from './Header';
-import ArtistInput from './ArtistInput';
-import Connector from './Connector';
+import Artists from './Artists';
 
 const theme = {
   white: '#fff',
@@ -21,46 +20,23 @@ const StyledMain = styled.main`
   * {
     box-sizing: border-box;
   }
+  button {
+    cursor: pointer;
+  }
   *::selection {
     color: ${({ theme }) => theme.white}; 
     background: ${({ theme }) => theme.primary};
   }
 `;
 
-const StyledArtistSuperWrapper = styled.div`
-  padding: 0px 10px;
-  min-height: calc(100vh - 70px);
-  display: flex;
-  align-items: center;
-`;
-
-const StyledArtistWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  @media (orientation: landscape) {
-    flex-direction: row;
-    justify-content: center;
-  }
-`;
-
-const App = () => {
-  return (
-    <ThemeProvider theme={theme}>
-      <StyledMain>
-        <Reset />
-        <Header />
-        <StyledArtistSuperWrapper>
-          <StyledArtistWrapper>
-            <ArtistInput />
-            <Connector />
-            <ArtistInput />
-          </StyledArtistWrapper>
-        </StyledArtistSuperWrapper>
-      </StyledMain>
-    </ThemeProvider>
-  );
-}
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <StyledMain>
+      <Reset />
+      <Header />
+      <Artists />
+    </StyledMain>
+  </ThemeProvider>
+);
 
 export default App;
