@@ -81,7 +81,7 @@ export default ({ data: { image, name, url, genre }, data, setSelectedArtist, ba
             });
           }}
         >
-          <StyledButton><StyledBackIcon /></StyledButton>
+          <StyledButton><StyledBackIcon aria-label="switch back to the artist selection" /></StyledButton>
         </form>
         )
       }

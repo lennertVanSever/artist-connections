@@ -17,6 +17,7 @@ const StyledMain = styled.main`
   min-height: 100vh;
   width: 100vw;
   font-family: helvetica;
+  box-sizing: border-box;
   * {
     box-sizing: border-box;
   }

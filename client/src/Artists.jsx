@@ -4,7 +4,6 @@ import ArtistInput from './ArtistInput';
 import ArtistPath from './ArtistPath';
 
 const StyledSuperWrapper = styled.div`
-  padding: 0px 10px;
   min-height: calc(100vh - 70px);
   display: flex;
   align-items: center;

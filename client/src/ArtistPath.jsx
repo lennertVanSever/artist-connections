@@ -50,61 +50,39 @@ const StyledLoader = styled.div`
   }
 `;
 
-const appear = keyframes`
-  100% {
-    min-width: 300px;
-    min-height: 300px;
-    border-radius: 0px;
-    margin-bottom: 25px;
-    margin: 12.5px;
-  }
-`;
 
-const appearH2 = keyframes`
-  100% {
-    font-size: 30px;
-    line-height: 32px;
-  }
-`;
-
-const appearH4 = keyframes`
-  100% {
-    font-size: 20px;
-  }
-`;
-
-const StyledArtistWrapperAdjusted = styled(StyledArtistWrapper)`
-  height: 0;
-  width: 0;
-  min-width: 0;
-  min-height: 0;
-  margin: 0;
-  animation: ${appear} 1s linear;
-  animation-delay: ${({ delay }) => delay}s;
-  animation-fill-mode: forwards;
-  overflow: hidden;
-  border-radius: 50%;
-  h2 {
-    font-size: 0px;
-    line-height: 0px;
-    animation: ${appearH2} 1s linear;
-    animation-delay: ${({ delay }) => delay}s;
-    animation-fill-mode: forwards;
-  }
-  h4 {
-    font-size: 0px;
-    animation: ${appearH4} 1s linear;
-    animation-delay: ${({ delay }) => delay}s;
-    animation-fill-mode: forwards;
-  }
-`;
+const ArtistWrapper = ({ children, index }) => {
+  const [display, setDisplay] = useState('none');
+  console.log(index);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDisplay('inline');
+    }, index * 150);
+    return () => {
+      clearTimeout(timer)
+    }
+  }, []);
+  const StyledArtistWrapperAdjusted = styled(StyledArtistWrapper)`
+    display: ${display};
+  `;
+  return (
+    <StyledArtistWrapperAdjusted shouldBeDisplayed>
+      {children}
+    </StyledArtistWrapperAdjusted>
+  )
+}
 
 export default ({ data }) => (
   <>
     <StyledLoader opacity={data === 'LOADING' ? 1 : 0} />
     {
       Array.isArray(data) && data.map((artistData, index) => ( 
-        <StyledArtistWrapperAdjusted delay={index}><Artist data={artistData}/></StyledArtistWrapperAdjusted>
+        <ArtistWrapper
+          key={artistData.id}
+          index={index}
+        >
+          <Artist data={artistData}/>
+        </ArtistWrapper>
       ))
     }
   </>
