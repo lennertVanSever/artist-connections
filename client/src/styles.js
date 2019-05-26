@@ -7,7 +7,7 @@ export const StyledArtistWrapper = styled.div`
 
   @media (orientation: portrait) {
     width: calc(100vw - 30px);
-    height: 50%;
+    height: calc(50% - 25px);
     margin: 25px 15px;
     margin-top: 0px;
     &:last-of-type {
