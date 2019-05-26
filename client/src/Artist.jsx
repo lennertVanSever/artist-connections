@@ -72,11 +72,11 @@ const StyledArrowIcon = styled(ArrowIcon)`
   ${iconStyle}
   position: absolute;
   margin: auto;
-  @media (orientation: landscape) {
+  @media (min-width: 700px) {
     top: 0;
     bottom: 0;
   }
-  @media (orientation: portrait) {
+  @media (max-width: 700px) {
     left: 0px;
     right: 0px;
     transform: rotate(90deg);
@@ -84,19 +84,19 @@ const StyledArrowIcon = styled(ArrowIcon)`
   ${({ positionedBegin }) => {
     if (positionedBegin) {
       return css`
-        @media (orientation: landscape) {
+        @media (min-width: 700px) {
           left: -21px;
         }
-        @media (orientation: portrait) {
+        @media (max-width: 700px) {
           top: -21px;
         }
       `;
     }
     return css`
-      @media (orientation: landscape) {
+      @media (min-width: 700px) {
         right: -21px;
       }
-      @media (orientation: portrait) {
+      @media (max-width: 700px) {
         bottom: -21px;
       }
     `;
@@ -104,10 +104,10 @@ const StyledArrowIcon = styled(ArrowIcon)`
   ${({ flip }) => {
     if (flip) {
       return css`
-        @media (orientation: landscape) {
+        @media (min-width: 700px) {
           transform: rotate(180deg);
         }
-        @media (orientation: portrait) {
+        @media (max-width: 700px) {
           transform: rotate(270deg);
         }
       `;

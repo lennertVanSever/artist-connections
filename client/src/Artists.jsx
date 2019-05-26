@@ -14,7 +14,7 @@ const StyledWrapper = styled.div`
   position: relative;
   margin: auto;
   display: flex;
-  @media (orientation: portrait) {
+  @media (max-width: 700px) {
     height: 100%;
     align-items: center;
     justify-content: center;
@@ -23,7 +23,7 @@ const StyledWrapper = styled.div`
     min-height: min-content;
     flex-direction: column;
   }
-  @media (orientation: landscape) {
+  @media (min-width: 700px) {
     height: 300px;
     flex-direction: row;
     justify-content: center;

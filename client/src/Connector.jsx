@@ -11,7 +11,7 @@ const StyledHr = styled.hr`
   bottom: 0;
   top: 0;
   margin: auto;
-  @media (orientation: landscape) {
+  @media (min-width: 700px) {
     height: 2px;
     width: 100%;
   }
@@ -21,7 +21,7 @@ const StyledWrapper = styled.div`
   position: absolute;
   z-index: 0;
   height: calc(100% - 27px);
-  @media (orientation: landscape) {
+  @media (min-width: 700px) {
     width: calc(100% - 27px);
   }
 `;

@@ -41,7 +41,7 @@ const StyledLoader = styled.div`
   animation: ${upAndDown} .5s ease-in-out infinite;
   opacity: ${({ opacity }) => opacity};
 
-  @media (orientation: landscape) {
+  @media (min-width: 700px) {
     animation: ${leftAndRight} .5s ease-in-out infinite;
     top: 0px;
     left: 0px;
