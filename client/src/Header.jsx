@@ -4,6 +4,8 @@ import { ReactComponent as GitHubLogo } from './icons/GitHub.svg';
 
 
 const StyledHeader = styled.header`
+  background-color: ${({ theme }) => theme.black}; 
+  position: fixed;
   width: 100%;
   display: flex;
   align-items: center;
@@ -11,6 +13,8 @@ const StyledHeader = styled.header`
   padding: 0px 15px;
   height: 45px;
   box-sizing: border-box;
+  z-index: 2;
+  top: 0;
 `;
 
 const StyledH1 = styled.h1`

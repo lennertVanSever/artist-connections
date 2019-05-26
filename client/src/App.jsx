@@ -13,9 +13,8 @@ const theme = {
 }
 
 const StyledMain = styled.main`
-  background-color: ${({ theme }) => theme.black};
-  min-height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   font-family: helvetica;
   box-sizing: border-box;
   * {

@@ -24,6 +24,10 @@ const StyledArticle = styled.article`
   position: absolute;
   width: 100%;
   height: 100%;
+  -webkit-perspective: 0;
+  -webkit-backface-visibility: hidden;
+  -webkit-transform: translate3d(0,0,0);
+  visibility:visible;
   backface-visibility: hidden;
 `;
 
@@ -207,7 +211,9 @@ export default ({ selectedArtist, setSelectedArtist }) => {
   return (
     <StyledSuperWrapper>
       <StyledWrapper rotate={selectedArtist.confirmed ? 180 : 0}>
-        <StyledArticleInput pointerEvents={(selectedArtist.confirmed) ? 'none' : 'all'}>
+        <StyledArticleInput
+          pointerEvents={(selectedArtist.confirmed) ? 'none' : 'all'}
+        >
           <StyledInputWrapper>
             <StyledLabel><StyledSearchIcon/></StyledLabel>
             <Search setProcessText={setProcessText} searchArtists={searchArtists} resetArtists={resetArtists} />

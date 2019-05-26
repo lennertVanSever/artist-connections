@@ -4,19 +4,27 @@ import ArtistInput from './ArtistInput';
 import ArtistPath from './ArtistPath';
 
 const StyledSuperWrapper = styled.div`
-  min-height: calc(100vh - 70px);
+  height: 100%;
   display: flex;
   align-items: center;
-  overflow: auto;
 `;
 
 const StyledWrapper = styled.div`
+  max-height: 100%;
   position: relative;
   margin: auto;
   display: flex;
-  align-items: center;
-  flex-direction: column;
+  @media (orientation: portrait) {
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    min-height: -moz-min-content;
+    min-height: -webkit-min-content;
+    min-height: min-content;
+    flex-direction: column;
+  }
   @media (orientation: landscape) {
+    height: 300px;
     flex-direction: row;
     justify-content: center;
   }

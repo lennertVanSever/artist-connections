@@ -1,23 +1,33 @@
 import styled from 'styled-components';
 
 export const StyledArtistWrapper = styled.div`
-  width: calc(100vw - 30px);
   max-width: 300px;
-  height: calc(50vh - 37.5px);
   max-height: 300px;
-  margin: 15px;
-  margin-top: 0px;
   z-index: 1;
-  &:last-of-type {
-    margin-bottom: 5px;
+
+  @media (orientation: portrait) {
+    width: calc(100vw - 30px);
+    height: 50%;
+    margin: 25px 15px;
+    margin-top: 0px;
+    &:last-of-type {
+      margin-bottom: 5px;
+    }
+    @media (min-height: 700px) {
+      margin: 25px;
+      margin-top: 0px;
+    }
   }
   @media (orientation: landscape) {
-    height: calc(100vh - 60px);
-    width: calc(50vw - 23px);
+    height: 100%;
+    width: calc(50vw - 27.5px);
     margin: 0;
-    margin-right: 15px;
+    margin-right: 25px;
     &:first-of-type {
       margin-left: 15px;
+    }
+    &:last-of-type {
+      margin-right: 15px;
     }
   }
   /*

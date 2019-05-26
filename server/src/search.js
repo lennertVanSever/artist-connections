@@ -3,7 +3,6 @@ const { getAuthorizationHeader, cherryPickData } = require('./spotify');
 
 exports.default = async (req, res) => {
   const headers = await getAuthorizationHeader();
-  console.log(req.params.name);
   const searchResult = await fetch(`https://api.spotify.com/v1/search?q=${req.params.name}&type=artist`, { headers });
   if (searchResult.status === 200) {
     let data = await searchResult.json();

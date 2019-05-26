@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
-import { ReactComponent as BackIcon } from './icons/Back.svg';
+import { ReactComponent as ArrowIcon } from './icons/Arrow.svg';
+import { ReactComponent as CrossIcon } from './icons/Cross.svg';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -62,13 +63,79 @@ const StyledButton = styled.button`
   margin: 0;
 `;
 
-const StyledBackIcon = styled(BackIcon)`
+const iconStyle = css`
   width: 16px;
   height: 16px;
 `;
 
-export default ({ data: { image, name, url, genre }, data, setSelectedArtist, backArrow }) => (
+const StyledArrowIcon = styled(ArrowIcon)`
+  ${iconStyle}
+  position: absolute;
+  margin: auto;
+  @media (orientation: landscape) {
+    top: 0;
+    bottom: 0;
+  }
+  @media (orientation: portrait) {
+    left: 0px;
+    right: 0px;
+    transform: rotate(90deg);
+  }
+  ${({ positionedBegin }) => {
+    if (positionedBegin) {
+      return css`
+        @media (orientation: landscape) {
+          left: -21px;
+        }
+        @media (orientation: portrait) {
+          top: -21px;
+        }
+      `;
+    }
+    return css`
+      @media (orientation: landscape) {
+        right: -21px;
+      }
+      @media (orientation: portrait) {
+        bottom: -21px;
+      }
+    `;
+  }};
+  ${({ flip }) => {
+    if (flip) {
+      return css`
+        @media (orientation: landscape) {
+          transform: rotate(180deg);
+        }
+        @media (orientation: portrait) {
+          transform: rotate(270deg);
+        }
+      `;
+    }
+  }}
+`;
+
+const StyledCrossIcon = styled(CrossIcon)`
+  ${iconStyle}
+`;
+
+const spotifyRelatedUrl = (id) => `https://open.spotify.com/artist/${id}/related`;
+
+export default ({ data: { image, name, url, genre, connection1, connection2 }, data, setSelectedArtist, backArrow }) => (
   <StyledWrapper image={image}>
+    { connection1 && ( 
+      <a href={spotifyRelatedUrl(connection1.source)} target="_blank">
+        <StyledArrowIcon
+          positionedBegin
+          flip={connection1.direction === 'RIGHT'}
+        />
+      </a>
+    )}
+    { connection2 && (
+      <a href={spotifyRelatedUrl(connection2.source)} target="_blank">
+        <StyledArrowIcon flip={connection2.direction === 'RIGHT'} />
+      </a>
+    )}
     <StyledContent>
       {
         backArrow && (
@@ -81,11 +148,11 @@ export default ({ data: { image, name, url, genre }, data, setSelectedArtist, ba
             });
           }}
         >
-          <StyledButton><StyledBackIcon aria-label="switch back to the artist selection" /></StyledButton>
+          <StyledButton><StyledCrossIcon aria-label="switch back to the artist selection" /></StyledButton>
         </form>
         )
       }
-      <StyledH2><StyledAnchor href={url}>{name}</StyledAnchor></StyledH2>
+      <StyledH2><StyledAnchor href={url} target="_blank">{name}</StyledAnchor></StyledH2>
       <StyledH4>{genre}</StyledH4>
     </StyledContent>
     <StyledBackground />
