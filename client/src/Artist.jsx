@@ -121,10 +121,15 @@ const StyledCrossIcon = styled(CrossIcon)`
 
 const spotifyRelatedUrl = (id) => `https://open.spotify.com/artist/${id}/related`;
 
+const externalUrlProps = {
+  rel: 'noreferrer',
+  target: '_blank'
+}
+
 export default ({ data: { image, name, url, genre, connection1, connection2 }, data, setSelectedArtist, backArrow }) => (
   <StyledWrapper image={image}>
     { connection1 && ( 
-      <a href={spotifyRelatedUrl(connection1.source)} target="_blank">
+      <a href={spotifyRelatedUrl(connection1.source)} {...externalUrlProps}>
         <StyledArrowIcon
           positionedBegin
           flip={connection1.direction === 'RIGHT'}
@@ -132,7 +137,7 @@ export default ({ data: { image, name, url, genre, connection1, connection2 }, d
       </a>
     )}
     { connection2 && (
-      <a href={spotifyRelatedUrl(connection2.source)} target="_blank">
+      <a href={spotifyRelatedUrl(connection2.source)} {...externalUrlProps}>
         <StyledArrowIcon flip={connection2.direction === 'RIGHT'} />
       </a>
     )}
@@ -152,7 +157,7 @@ export default ({ data: { image, name, url, genre, connection1, connection2 }, d
         </form>
         )
       }
-      <StyledH2><StyledAnchor href={url} target="_blank">{name}</StyledAnchor></StyledH2>
+      <StyledH2><StyledAnchor href={url} {...externalUrlProps}>{name}</StyledAnchor></StyledH2>
       <StyledH4>{genre}</StyledH4>
     </StyledContent>
     <StyledBackground />

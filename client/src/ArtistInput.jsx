@@ -142,7 +142,13 @@ const ArtistSuggestion = ({ data, setSelectedArtist }) => (
 );
 
 let timeout = 0;
-const Search = ({ searchArtists, resetArtists, setProcessText }) => {
+const Search = ({
+  searchArtists,
+  resetArtists,
+  setProcessText,
+  placeholder,
+  ariaLabel
+  }) => {
   const [value, setValue] = useState('');
 
   const initiateArtistSearch = () => {
@@ -156,8 +162,8 @@ const Search = ({ searchArtists, resetArtists, setProcessText }) => {
 
   return (
       <StyledInput 
-        aria-label="Search your first spotify artist to make a comparisson with the second artist" 
-        placeholder="Search your first artist"
+        aria-label={ariaLabel}
+        placeholder={placeholder}
         type="search"
         value={value}
         onChange={event => setValue(event.target.value)}
@@ -167,7 +173,12 @@ const Search = ({ searchArtists, resetArtists, setProcessText }) => {
   )
 }
 
-export default ({ selectedArtist, setSelectedArtist }) => {
+export default ({
+  selectedArtist,
+  setSelectedArtist,
+  placeholder,
+  ariaLabel,
+}) => {
   const [artists, setArtists] = useState(null);
   const [processText, setProcessText] = useState('');
   const resetArtists = () => {
@@ -216,7 +227,13 @@ export default ({ selectedArtist, setSelectedArtist }) => {
         >
           <StyledInputWrapper>
             <StyledLabel><StyledSearchIcon/></StyledLabel>
-            <Search setProcessText={setProcessText} searchArtists={searchArtists} resetArtists={resetArtists} />
+            <Search
+              setProcessText={setProcessText}
+              searchArtists={searchArtists}
+              resetArtists={resetArtists}
+              placeholder={placeholder}
+              ariaLabel={ariaLabel}
+            />
             <StyledHr/>
           </StyledInputWrapper>
           {getContent()}

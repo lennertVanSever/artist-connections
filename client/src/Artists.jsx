@@ -51,9 +51,19 @@ export default () => {
   return (
     <StyledSuperWrapper>
       <StyledWrapper>
-        <ArtistInput selectedArtist={firstSelectedArtist} setSelectedArtist={setFirstSelectedArtist} />
+        <ArtistInput
+          selectedArtist={firstSelectedArtist}
+          setSelectedArtist={setFirstSelectedArtist}
+          placeholder="Search your first artist"
+          ariaLabel="Search your first artist from spotify and compare it with your second input"
+        />
         { artistPath && <ArtistPath data={artistPath} />}
-        <ArtistInput selectedArtist={secondSelectedArtist} setSelectedArtist={setSecondSelectedArtist} />
+        <ArtistInput
+          selectedArtist={secondSelectedArtist}
+          setSelectedArtist={setSecondSelectedArtist}
+          placeholder="Search your second artist"
+          ariaLabel="Search your second artist from spotify and compare it with your first input"
+        />
       </StyledWrapper>
     </StyledSuperWrapper>
   )
