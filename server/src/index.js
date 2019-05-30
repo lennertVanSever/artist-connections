@@ -1,10 +1,11 @@
+
 require('dotenv').config();
+var express = require('express'), app = module.exports = express(), port = process.env.PORT || 8080;
 var cors = require('cors')
 
-var express = require('express'), app = express(), port = process.env.PORT || 8080;
-
 app.use(cors())
-app.listen(port);
+
+require('./serveClient');
 
 const search = require('./search');
 app.get('/search/:name', search.default);
@@ -12,5 +13,10 @@ app.get('/search/:name', search.default);
 const getPath = require('./getPath');
 app.get('/getPath/:firstArtistId/:secondArtistId', getPath.default);
 
+const { getArtistsDataRoute } = require('./spotify');
+app.get('/getArtists/:firstArtistId/:secondArtistId', getArtistsDataRoute);
 
-// require('./getPath.js');
+
+app.listen(port, () => {
+  console.log(`server is running on http://localhost:${port}`);
+});

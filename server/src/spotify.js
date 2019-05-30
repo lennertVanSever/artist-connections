@@ -42,7 +42,31 @@ const cherryPickData = (data) => {
   })
 }
 
+const getArtistsData = async (artistIds) => {
+  const headers = await getAuthorizationHeader();
+  const response = await fetch(`https://api.spotify.com/v1/artists?ids=${artistIds.join()}`, { headers });
+  if (response.status === 200) {
+    let data = await response.json();
+    if (data.artists.every(value => value)) {
+      const cherryPickedData = cherryPickData(data.artists);
+      return cherryPickedData;
+    }
+    return 'NOT_FOUND';
+  }
+  return 'SOMETHING_WENT_WRONG';
+}
+const getArtistsDataRoute =  async (req, res) => {
+  const artistData = await getArtistsData([req.params.firstArtistId, req.params.secondArtistId]);
+  if (artistData === 'SOMETHING_WENT_WRONG') {
+    return res.status(500).send(artistData);
+  }
+  return res.json(artistData);
+}
+
+
 module.exports = {
   getAuthorizationHeader,
   cherryPickData,
+  getArtistsData,
+  getArtistsDataRoute,
 }
