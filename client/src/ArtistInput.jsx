@@ -187,7 +187,7 @@ export default ({
   };
   const searchArtists = async (name) => {
     setProcessText('Searching for artists via Spotify...');
-    const result = await fetch(`${process.env.REACT_APP_SERVER_ADDRESS}/search/${name}`);
+    const result = await fetch(`/search/${name}`);
     setProcessText('');
     if (result.status === 200) {
       let data = await result.json();

@@ -1,3 +1,4 @@
+var compression = require('compression')
 var express = require('express')
 var app = require('./index');
 
@@ -8,11 +9,14 @@ const { getArtistsData } = require('./spotify');
 
 const clientDirectory = '../client';
 
+app.use(compression())
+
 app.get('/', function(request, response) {
   const filePath = path.resolve(clientDirectory, './build', 'index.html');
   fs.readFile(filePath, 'utf8', function (err,data) {
-    data = data.replace(/\$TITLE/g, 'Artist connections');
+    data = data.replace(/\$TITLE/g, 'Artist Connections');
     data = data.replace(/\$DESCRIPTION/g, 'Find out the degree of seperation between any two given artist');
+    data = data.replace(/\$IMAGE1/g, '/images/banner.png');
     response.send(data);
   });
 });

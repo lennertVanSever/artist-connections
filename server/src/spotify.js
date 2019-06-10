@@ -24,7 +24,7 @@ const getAuthorizationHeader = async () => {
 
 const cherryPickData = (data) => {
   return data.map(({ external_urls: { spotify }, genres, images, name, id}) => {
-    const getImage = () => { 
+    const getImage = () => {
       if (images[0]) return images[0].url;
       return null;
     }

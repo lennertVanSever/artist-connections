@@ -1,9 +1,6 @@
 
 require('dotenv').config();
 var express = require('express'), app = module.exports = express(), port = process.env.PORT || 8080;
-var cors = require('cors')
-
-app.use(cors())
 
 require('./serveClient');
 

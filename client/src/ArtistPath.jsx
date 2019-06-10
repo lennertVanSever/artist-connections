@@ -39,7 +39,6 @@ const StyledLoader = styled.div`
   margin-left: 1px;
   transition: opacity 0.5s;
   animation: ${upAndDown} .5s ease-in-out infinite;
-  opacity: ${({ opacity }) => opacity};
 
   @media (min-width: 700px) {
     animation: ${leftAndRight} .5s ease-in-out infinite;
@@ -74,7 +73,7 @@ const ArtistWrapper = ({ children, index }) => {
 
 export default ({ data }) => (
   <>
-    <StyledLoader opacity={data === 'LOADING' ? 1 : 0} />
+    { data === 'LOADING' && <StyledLoader /> }
     {
       Array.isArray(data) && data.map((artistData, index) => ( 
         <ArtistWrapper
