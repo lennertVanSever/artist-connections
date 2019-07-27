@@ -1,6 +1,9 @@
 
 require('dotenv').config();
-var express = require('express'), app = module.exports = express(), port = process.env.PORT || 8080;
+const express = require('express'), app = module.exports = express();
+
+const PORT = 8080;
+const HOST = '0.0.0.0';
 
 require('./serveClient');
 
@@ -14,6 +17,6 @@ const { getArtistsDataRoute } = require('./spotify');
 app.get('/getArtists/:firstArtistId/:secondArtistId', getArtistsDataRoute);
 
 
-app.listen(port, () => {
-  console.log(`server is running on http://localhost:${port}`);
-});
+app.listen(PORT, HOST);
+
+console.log(`server is running on http://${HOST}:${PORT}`);

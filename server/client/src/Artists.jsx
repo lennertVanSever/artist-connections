@@ -101,12 +101,16 @@ export default () => {
       fetchArtistPathData();
     } else {
       document.title = 'Artist Connections';
+      if (firstSelectedArtist.confirmed !== secondSelectedArtist.confirmed) {
+        window.history.replaceState({}, '', `/artists`);
+      }
     }
   }, [firstSelectedArtist, secondSelectedArtist]);
 
   useEffect(() => {
     const linkParams = window.location.pathname.split('/');
     if (linkParams[2] && !firstSelectedArtist.confirmed && !secondSelectedArtist.confirmed) {
+      console.log('fetch artist from URL');
       const fetchArtistsData = async () => {
         const result = await fetch(`/getArtists/${linkParams[2]}/${linkParams[3]}`);
         if (result.status === 200) {

@@ -126,7 +126,7 @@ const externalUrlProps = {
   target: '_blank'
 }
 
-export default ({ data: { image, name, url, genre, connection1, connection2 }, data, setSelectedArtist, backArrow }) => (
+export default ({ data: { image, name, url, genre, connection1, connection2, id }, data, setSelectedArtist, backArrow }) => (
   <StyledWrapper image={image}>
     { connection1 && ( 
       <a href={spotifyRelatedUrl(connection1.source)} {...externalUrlProps}>
@@ -147,6 +147,7 @@ export default ({ data: { image, name, url, genre, connection1, connection2 }, d
         <form
           onSubmit={event => {
             event.preventDefault();
+            console.log(id);
             setSelectedArtist({
               ...data,
               confirmed: false,

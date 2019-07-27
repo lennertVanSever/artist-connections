@@ -7,7 +7,7 @@ const fs = require('fs');
 
 const { getArtistsData } = require('./spotify');
 
-const clientDirectory = '../client';
+const clientDirectory = './client';
 
 app.use(compression())
 
