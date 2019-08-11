@@ -3,7 +3,6 @@ const fetch = require('node-fetch');
 const getAuthorizationHeader = async () => {
   const client_id = process.env.SPOTIFY_CLIENT_ID;
   const client_secret = process.env.SPOTIFY_CLIENT_SERVER;
-  console.log({ client_id, client_secret });
   const response = await fetch('https://accounts.spotify.com/api/token', {
     method: 'POST',
     url: 'https://accounts.spotify.com/api/token',
