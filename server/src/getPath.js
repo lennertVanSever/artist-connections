@@ -1,5 +1,5 @@
 const neo4j = require('neo4j-driver').v1;
-const driver = neo4j.driver('bolt://localhost:7687', neo4j.auth.basic('neo4j', process.env.NEO4J_PASSWORD));
+const driver = neo4j.driver('bolt://0.0.0.0:7687', neo4j.auth.basic('neo4j', process.env.NEO4J_PASSWORD));
 const session = driver.session();
 const fetch = require('node-fetch');
 const { getAuthorizationHeader, cherryPickData } = require('./spotify');
