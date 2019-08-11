@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.js": "/static/js/main.15de4bfa.chunk.js",
+    "main.js.map": "/static/js/main.15de4bfa.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.6c20381e.chunk.js": "/static/js/2.6c20381e.chunk.js",
+    "static/js/2.6c20381e.chunk.js.map": "/static/js/2.6c20381e.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.eea7a3febefd1e45696433eb950c87ac.js": "/precache-manifest.eea7a3febefd1e45696433eb950c87ac.js",
+    "service-worker.js": "/service-worker.js",
+    "static/media/Arrow.0eddca80.svg": "/static/media/Arrow.0eddca80.svg",
+    "static/media/Cross.35900840.svg": "/static/media/Cross.35900840.svg",
+    "static/media/GitHub.6fce2d2b.svg": "/static/media/GitHub.6fce2d2b.svg",
+    "static/media/Reload.c7531a90.svg": "/static/media/Reload.c7531a90.svg",
+    "static/media/Search.e36cb75a.svg": "/static/media/Search.e36cb75a.svg",
+    "static/media/Share.cf311935.svg": "/static/media/Share.cf311935.svg"
+  }
+}
