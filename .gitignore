@@ -87,4 +87,4 @@ typings/
 .dynamodb/
 
 # Custom files
-server/src/data.json
+data.json
