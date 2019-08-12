@@ -1,12 +1,12 @@
 const neo4j = require('neo4j-driver').v1;
 const driver = neo4j.driver('bolt://35.233.7.62:7687', neo4j.auth.basic('neo4j', process.env.NEO4J_PASSWORD));
-const session = driver.session();
 const fetch = require('node-fetch');
 const { getAuthorizationHeader, cherryPickData } = require('./spotify');
 
 
 const getPath = (artist1, artist2) => {
   return new Promise((resolve, reject) => {
+    const session = driver.session();
     const resultPromise = session.run(
       `
         MATCH path = shortestPath(
@@ -15,8 +15,9 @@ const getPath = (artist1, artist2) => {
       `,
       {artist1, artist2}
     );
-
     resultPromise.then(result => {
+      driver.close();
+      session.close();
       const singleRecord = result.records[0];
       if (singleRecord) {
         const node = singleRecord.get(0);
@@ -69,7 +70,5 @@ exports.default = async (req, res) => {
   } else {
     return res.status(500).send('something went wrong');
   }
-  driver.close();
-  session.close();
 }
 
