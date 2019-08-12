@@ -2,6 +2,8 @@ const neo4j = require('neo4j-driver').v1;
 const driver = neo4j.driver('bolt://35.233.7.62:7687', neo4j.auth.basic('neo4j', process.env.NEO4J_PASSWORD));
 const fetch = require('node-fetch');
 const { getAuthorizationHeader, cherryPickData } = require('./spotify');
+const { Client } = require('pg');
+const { saveCountOfConnections } = require('./persistence');
 
 
 const getPath = (artist1, artist2) => {
@@ -42,7 +44,8 @@ const getPath = (artist1, artist2) => {
 }
 
 exports.default = async (req, res) => {
-  const shortestPathRaw = await getPath(req.params.firstArtistId, req.params.secondArtistId);
+  const { firstArtistId, secondArtistId } = req.params;
+  const shortestPathRaw = await getPath(firstArtistId, secondArtistId);
   if (shortestPathRaw === 'NOT FOUND') {
     return res.json({ message: shortestPathRaw });
   }
@@ -66,7 +69,9 @@ exports.default = async (req, res) => {
         artist.connection2 = shortestPathRaw[index + 1].connection;
       }
     });
-    return res.json(cherryPickedData);
+    res.json(cherryPickedData);
+    saveCountOfConnections(firstArtistId, secondArtistId, cherryPickedData.length);
+    return;
   } else {
     return res.status(500).send('something went wrong');
   }
