@@ -12,12 +12,11 @@ const StyledSuperWrapper = styled.div`
 `;
 
 const StyledWrapper = styled.div`
-  max-height: 100%;
   position: relative;
   margin: auto;
   display: flex;
   @media (max-width: 700px) {
-    height: 100%;
+    min-height: 100%;
     align-items: center;
     justify-content: center;
     min-height: -moz-min-content;
