@@ -147,7 +147,6 @@ export default ({ data: { image, name, url, genre, connection1, connection2, id 
         <form
           onSubmit={event => {
             event.preventDefault();
-            console.log(id);
             setSelectedArtist({
               ...data,
               confirmed: false,

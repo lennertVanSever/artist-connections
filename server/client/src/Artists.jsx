@@ -110,7 +110,6 @@ export default () => {
   useEffect(() => {
     const linkParams = window.location.pathname.split('/');
     if (linkParams[2] && !firstSelectedArtist.confirmed && !secondSelectedArtist.confirmed) {
-      console.log('fetch artist from URL');
       const fetchArtistsData = async () => {
         const result = await fetch(`/getArtists/${linkParams[2]}/${linkParams[3]}`);
         if (result.status === 200) {
@@ -125,14 +124,20 @@ export default () => {
 
   useEffect(() => {
     if (artistPath) {
-      if (artistPath.message === 'DIRECT CONNECTION') {
-        window.alert(`${firstSelectedArtist.name} and ${secondSelectedArtist.name} seem to have a direct connection. They have no level of seperation.`);
-      }
-      if (artistPath.message === 'NOT FOUND') {
-        window.alert(`One of the given artists seems to have no related artists. We can't calculate the level of seperation.`);
+      switch (artistPath.message) {
+        case 'DIRECT CONNECTION':
+          return window.alert(`${firstSelectedArtist.name} and ${secondSelectedArtist.name} seem to have a direct connection. They have no level of seperation.`);
+        case 'NOT FOUND':
+          return window.alert(`One of the given artists seems to have no related artists. We can't calculate the level of seperation.`);
+        case 'SAME ARTIST':
+          return window.alert(`${firstSelectedArtist.name} and ${secondSelectedArtist.name} are the same artist. Of course they are connected! You don't need an app for that.`);
+        case 'UNKNOWN ERROR':
+          return window.alert(`This sucks, an unknown error occured. Could you try again?`);
+        default:
+          break;
       }
     }
-  }, [artistPath]);
+  }, [artistPath, firstSelectedArtist.name, secondSelectedArtist.name]);
 
   return (
     <>

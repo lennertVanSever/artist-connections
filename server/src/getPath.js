@@ -27,7 +27,6 @@ const getPath = (artist1, artist2) => {
           const connection = () => {
             const identityIdArtist1 = element.start.properties.artistId;
             const identityIdArtist2 = element.end.properties.artistId;
-            // console.log(JSON.stringify(element, null, 2));
             if (element.relationship.start.low === element.start.identity.low) return ({ direction: 'RIGHT', source: identityIdArtist1 });
             return ({ direction: 'LEFT', source: identityIdArtist2 });
           }
@@ -38,14 +37,21 @@ const getPath = (artist1, artist2) => {
       }
     }).catch(error => {
       console.log(error);
-      error(error);
+      reject(error);
     });
   });
 }
 
 exports.default = async (req, res) => {
   const { firstArtistId, secondArtistId } = req.params;
-  const shortestPathRaw = await getPath(firstArtistId, secondArtistId);
+  if (firstArtistId === secondArtistId) return res.json({ message: 'SAME ARTIST' });
+  let shortestPathRaw;
+  try {
+    shortestPathRaw = await getPath(firstArtistId, secondArtistId);
+  } catch (error) {
+    return res.json({ message: 'UNKNOWN ERROR' });
+  }
+
   if (shortestPathRaw === 'NOT FOUND') {
     return res.json({ message: shortestPathRaw });
   }

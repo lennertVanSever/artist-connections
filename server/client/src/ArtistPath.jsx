@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled, { keyframes, css } from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Artist from './Artist';
 import { StyledArtistWrapper } from './styles';
 
@@ -52,7 +52,6 @@ const StyledLoader = styled.div`
 
 const ArtistWrapper = ({ children, index }) => {
   const [display, setDisplay] = useState('none');
-  console.log(index);
   useEffect(() => {
     const timer = setTimeout(() => {
       setDisplay('inline');
@@ -60,7 +59,7 @@ const ArtistWrapper = ({ children, index }) => {
     return () => {
       clearTimeout(timer)
     }
-  }, []);
+  }, [index]);
   const StyledArtistWrapperAdjusted = styled(StyledArtistWrapper)`
     display: ${display};
   `;
