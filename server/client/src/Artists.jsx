@@ -90,8 +90,8 @@ export default () => {
       const fetchArtistPathData = async () => {
         setArtistPath('LOADING');
         const result = await fetch(`/getPath/${firstSelectedArtist.id}/${secondSelectedArtist.id}`);
-        window.history.replaceState({}, '', `/artists/${firstSelectedArtist.id}/${secondSelectedArtist.id}`);
-        document.title = `From ${firstSelectedArtist.name} to ${secondSelectedArtist.name}`;
+        const title = `From ${firstSelectedArtist.name} to ${secondSelectedArtist.name}`;
+        window.history.replaceState({}, title, `/artists/${firstSelectedArtist.id}/${secondSelectedArtist.id}`);
         if (result.status === 200) {
           let data = await result.json();
           setArtistPath(data);
@@ -99,9 +99,10 @@ export default () => {
       };
       fetchArtistPathData();
     } else {
-      document.title = 'Artist Connections';
+      const title = 'Artist Connections';
+      document.title = title;
       if (firstSelectedArtist.confirmed !== secondSelectedArtist.confirmed) {
-        window.history.replaceState({}, '', `/`);
+        window.history.replaceState({}, title, '/index.html');
       }
     }
   }, [firstSelectedArtist, secondSelectedArtist]);
