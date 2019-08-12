@@ -101,7 +101,7 @@ export default () => {
     } else {
       document.title = 'Artist Connections';
       if (firstSelectedArtist.confirmed !== secondSelectedArtist.confirmed) {
-        window.history.replaceState({}, '', `/artists`);
+        window.history.replaceState({}, '', `/`);
       }
     }
   }, [firstSelectedArtist, secondSelectedArtist]);
