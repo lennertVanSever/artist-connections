@@ -20,6 +20,7 @@ const getArtistCsv = () => {
 
 
 const createRelationCSV = (min, max, number) => {
+  
   const csvWriter = createCsvWriter({  
     path: `related${number}.csv`,
     header: [
@@ -49,8 +50,8 @@ const createRelationCSV = (min, max, number) => {
     .writeRecords(related)
     .then(()=> console.log('The CSV file was written successfully'));
 }
-/*
-createRelationCSV(0, 500000, 1);
-createRelationCSV(500000, 1000000, 2);
-createRelationCSV(1000000, 1500000, 3);
-*/
+// getArtistCsv();
+
+// createRelationCSV(0, 500000, 1);
+// createRelationCSV(500000, 1000000, 2);
+// createRelationCSV(1000000, 1500000, 3);

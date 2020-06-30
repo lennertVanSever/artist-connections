@@ -1,3 +1,4 @@
+require('dotenv').config();
 const fetch = require('node-fetch');
 const async = require('async');
 const fs = require('fs');
@@ -10,28 +11,15 @@ const getRelatedArtists = async (headers, id) => {
     let data = await response.json();
     return data.artists.map(({ id }) => id);
   } else {
-    // console.log(response);
     return 'error';
   }
   throw new Error(response);
 }
-/*
-const getRelatedArtistsFromList = async (headers, data) => {
-  return new Promise((resolve, reject) => {
-    async.forEachOf(data, async (artist, index) => {
-      const related = await getRelatedArtists(headers, artist.id);
-      data[index].related = related;
-    }, () => {
-      resolve(data);
-    });
-  });
-}
-*/
 
 const saveFile = (data) => {
   if (data) {
     const currentTotal = Object.keys(data).length;
-    const foreseenTotal = 2000000;
+    const foreseenTotal = 1200000;
     console.log('Total count of scraped artists', currentTotal);
     console.log('Estimated completion', `${Math.round((currentTotal / foreseenTotal) * 100)}%`);
     fs.writeFile(
@@ -49,6 +37,7 @@ let done = false;
 const getData = async () => {
   const headers = await getAuthorizationHeader();
   // const data = {};
+  
   let scraped = 0;
   let notScraped = {};
   Object.keys(data).forEach((key) => {
@@ -67,7 +56,6 @@ const getData = async () => {
   }
   Object.keys(notScraped).forEach(async (id, index) => {
     if (index < 100) {
-      console.log({ id, index });
       const artistData = await getRelatedArtists(headers, id);
       if (artistData === 'error') {
         if (state === 'succes') {

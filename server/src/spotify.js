@@ -12,13 +12,14 @@ const getAuthorizationHeader = async () => {
     },
     body: 'grant_type=client_credentials',
   });
+  let data = await response.json();
   if (response.status === 200) {
-    let data = await response.json();
     const token = data.access_token;
     return ({
       'Authorization': `Bearer ${token}`
     });
   }
+  console.log(data)
   throw new Error(response);
 }
 
