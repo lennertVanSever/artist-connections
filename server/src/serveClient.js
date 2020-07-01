@@ -15,7 +15,7 @@ app.get('/', function(request, response) {
   const filePath = path.resolve(clientDirectory, './build', 'index.html');
   fs.readFile(filePath, 'utf8', function (err,data) {
     data = data.replace(/\$TITLE/g, 'Artist Connections');
-    data = data.replace(/\$DESCRIPTION/g, 'Find out the degree of seperation between any two given artist');
+    data = data.replace(/\$DESCRIPTION/g, 'Find out the degree of separation between any two given artist');
     data = data.replace(/\$IMAGE1/g, '/images/banner.png');
     response.send(data);
   });
@@ -33,7 +33,7 @@ app.get('/artists/:firstArtistId/:secondArtistId', async (request, response) => 
 
   fs.readFile(filePath, 'utf8', function (err,data) {
     data = data.replace(/\$TITLE/g, `From ${firstArtistName} to ${secondArtistName}`);
-    data = data.replace(/\$DESCRIPTION/g, `The degree of seperation between ${firstArtistName} and ${secondArtistName}`);
+    data = data.replace(/\$DESCRIPTION/g, `The degree of separation between ${firstArtistName} and ${secondArtistName}`);
     data = data.replace(/\$IMAGE1/g, firstArtistImage);
     data = data.replace(/\$IMAGE2/g, secondArtistImage);
     data = data.replace(/\$URL/g, `http://artist-connections.com/${firstArtistName}/${secondArtistName}`);

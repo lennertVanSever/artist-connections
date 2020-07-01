@@ -126,9 +126,9 @@ export default () => {
     if (artistPath) {
       switch (artistPath.message) {
         case 'DIRECT CONNECTION':
-          return window.alert(`${firstSelectedArtist.name} and ${secondSelectedArtist.name} seem to have a direct connection. They have no level of seperation.`);
+          return window.alert(`${firstSelectedArtist.name} and ${secondSelectedArtist.name} seem to have a direct connection. They have no level of separation.`);
         case 'NOT FOUND':
-          return window.alert(`One of the given artists seems to have no related artists. We can't calculate the level of seperation.`);
+          return window.alert(`One of the given artists seems to have no related artists. We can't calculate the level of separation.`);
         case 'SAME ARTIST':
           return window.alert(`${firstSelectedArtist.name} and ${secondSelectedArtist.name} are the same artist. Of course they are connected! You don't need an app for that.`);
         case 'UNKNOWN ERROR':
