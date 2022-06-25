@@ -16,7 +16,7 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.0",
     "neo4j-driver": "^4.1.0",
-    "node-fetch": "^2.5.0",
+    "node-fetch": "^2.6.7",
     "pg": "^7.12.1"
   }
 }
